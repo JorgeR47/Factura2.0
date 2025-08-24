@@ -1,0 +1,59 @@
+@startuml
+
+class Empresa {
+
+    +descontarPorCada100()
+    +mostrarFactura()
+    +emitirFactura()
+    +llevarContabilidad()
+
+
+}
+Empresa -->"*" Producto: productos
+Factura --> Cliente: cliente
+Factura --> Fecha: fecha
+Empresa --> Factura: facturasGeneradas
+ProductoAdquirido --> Producto
+Factura --> ProductoAdquirido: productoAdquiridos
+class Factura {
+    -numero: Int
+    -fecha: Fecha
+    -subtotal: double
+    -descuento: double
+    -iva: double
+    -total: double
+}
+class Cliente {
+
+}
+
+
+abstract class Producto {
+    -nombre: String
+    -precioUnitario: double
+    -inventario: int
+
+}
+
+class ProductoConIva{
+    -iva: double
+}
+
+class ProductoSinIva{
+}
+
+ProductoConIva --|> Producto
+ProductoSinIva --|> Producto
+
+class ProductoAdquirido {
+    -nombre: String
+    -importe: double
+    -cantidadAdquirida: int
+
+}
+
+class Fecha {
+
+}
+
+@enduml
