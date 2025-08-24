@@ -1,0 +1,77 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class Cliente {
+  + Cliente(String): 
+  + toString(): String
+}
+class Empresa {
+  + Empresa(String): 
+  - validarCodigoProducto(int): boolean
+  + abastecerProductos(Producto[]): void
+  + obtenerProducto(int): Producto
+  + facturarProductosACliente(Cliente, ProductoAdquirido[]): Factura
+}
+class Factura {
+  + Factura(int, Fecha, Cliente, String, ProductoAdquirido[]): 
+  - calcularDescuento(): double
+  - calcularSubtotalEIva(): void
+  + toString(): String
+}
+class Fecha {
+  + Fecha(int, int, int): 
+  + toString(): String
+}
+class Main {
+  + Main(): 
+  + main(String[]): void
+}
+class Producto {
+  + Producto(String, double, int): 
+  + obtenerPrecioUnitario(): double
+  + obtenerIVA(): double
+  + toString(): String
+  + descontarInventario(int): int
+}
+class ProductoAdquirido {
+  + ProductoAdquirido(Producto, int): 
+  - validarCantidad(int): boolean
+  + obtenerImporte(): double
+  + obtenerIVA(): double
+  + toString(): String
+}
+class ProductoConIVA12 {
+  + ProductoConIVA12(String, double, int): 
+  - calcularIVADeProducto(): double
+  + obtenerIVA(): double
+}
+class ProductoConIVA15 {
+  + ProductoConIVA15(String, double, int): 
+  - calcularIVADeProducto(): double
+  + obtenerIVA(): double
+}
+class ProductoSinIVA {
+  + ProductoSinIVA(String, double, int): 
+  + obtenerIVA(): double
+}
+
+Empresa            -[#595959,dashed]->  Factura           : "«create»"
+Empresa            -[#595959,dashed]->  Fecha             : "«create»"
+Empresa           "1" *-[#595959,plain]-> "productos\n*" Producto          
+Factura           "1" *-[#595959,plain]-> "cliente\n1" Cliente           
+Factura           "1" *-[#595959,plain]-> "fecha\n1" Fecha             
+Factura           "1" *-[#595959,plain]-> "productoAdquirido\n*" ProductoAdquirido 
+Main               -[#595959,dashed]->  Cliente           : "«create»"
+Main               -[#595959,dashed]->  Empresa           : "«create»"
+Main               -[#595959,dashed]->  ProductoAdquirido : "«create»"
+Main               -[#595959,dashed]->  ProductoConIVA12  : "«create»"
+Main               -[#595959,dashed]->  ProductoConIVA15  : "«create»"
+Main               -[#595959,dashed]->  ProductoSinIVA    : "«create»"
+ProductoAdquirido "1" *-[#595959,plain]-> "producto\n1" Producto          
+ProductoConIVA12   -[#000082,plain]-^  Producto          
+ProductoConIVA15   -[#000082,plain]-^  Producto          
+ProductoSinIVA     -[#000082,plain]-^  Producto          
+@enduml
