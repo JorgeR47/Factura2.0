@@ -6,11 +6,11 @@ public class Main {
         Empresa empresa = new Empresa("IG");
         Cliente carlitos = new Cliente("Carlitos");
         empresa.abastecerProductos(
-                new ProductoConIVA15("Mochila", 89.99,  5),
-                new ProductoSinIVA("Zapatos", 50.00,  1),
-                new ProductoConIVA15("Linterna", 5.56,  3),
-                new ProductoSinIVA("Gorra", 3.00,  2),
-                new ProductoConIVA12("Gasdas", 2.00, 4)
+                new ProductoConIVA15("HP Laptop", 599.99,  5),
+                new ProductoSinIVA("Notebook X10", 150.00,  1),
+                new ProductoConIVA15("Mouse ", 25.56,  3),
+                new ProductoSinIVA("DELL Laptop", 300.00,  2),
+                new ProductoConIVA12("ASUS Laptop", 200.00, 4)
         );
 
         //cuando el cliente compra algunos productos
